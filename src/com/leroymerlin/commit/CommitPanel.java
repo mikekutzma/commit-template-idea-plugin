@@ -12,7 +12,6 @@ import java.io.File;
 public class CommitPanel {
     private JPanel mainPanel;
     private JComboBox changeType;
-    private JComboBox changeScope;
     private JTextField shortDescription;
     private JTextArea longDescription;
     private JTextField closedIssues;
@@ -36,7 +35,6 @@ public class CommitPanel {
     CommitMessage getCommitMessage() {
         return new CommitMessage(
                 (ChangeType) changeType.getSelectedItem(),
-                (String) changeScope.getSelectedItem(),
                 shortDescription.getText().trim(),
                 longDescription.getText().trim(),
                 closedIssues.getText().trim(),

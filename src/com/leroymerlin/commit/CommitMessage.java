@@ -11,21 +11,17 @@ class CommitMessage {
     private static final int MAX_LINE_LENGTH = 72; // https://stackoverflow.com/a/2120040/5138796
     private final String content;
 
-    CommitMessage(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String closedIssues, String breakingChanges) {
-        this.content = buildContent(changeType, changeScope, shortDescription, longDescription, closedIssues, breakingChanges);
+    CommitMessage(ChangeType changeType, String shortDescription, String longDescription, String closedIssues, String breakingChanges) {
+        this.content = buildContent(changeType, shortDescription, longDescription, closedIssues, breakingChanges);
     }
 
-    private String buildContent(ChangeType changeType, String changeScope, String shortDescription, String longDescription, String closedIssues, String breakingChanges) {
+    private String buildContent(ChangeType changeType, String shortDescription, String longDescription, String closedIssues, String breakingChanges) {
         StringBuilder builder = new StringBuilder();
-        builder.append(changeType.label());
-        if (isNotBlank(changeScope)) {
-            builder
-                    .append('(')
-                    .append(changeScope)
-                    .append(')');
-        }
+
         builder
-                .append(": ")
+                .append("[")
+                .append(changeType.label())
+                .append("] ")
                 .append(shortDescription)
                 .append(System.lineSeparator())
                 .append(System.lineSeparator())
@@ -43,7 +39,7 @@ class CommitMessage {
             for (String closedIssue : closedIssues.split(",")) {
                 builder
                         .append(System.lineSeparator())
-                        .append("Closes ")
+                        .append("Addresses: ")
                         .append(closedIssue);
             }
         }

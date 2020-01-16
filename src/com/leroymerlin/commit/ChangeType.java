@@ -28,11 +28,11 @@ public enum ChangeType {
     }
 
     public String label() {
-        return this.name().toLowerCase();
+        return this.name();
     }
 
     @Override
     public String toString() {
-        return String.format("%s - %s", this.label(), this.description);
+        return String.format("[%s] %s", this.label(), this.description);
     }
 }
